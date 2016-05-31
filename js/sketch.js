@@ -31,6 +31,8 @@ function setup() {
 }
 
 function draw() {
+	cells[i].move();
+	cells[i].show();
 	if (aliveA == 0 && start == false) {
 		console.log("A team wins!")
 		noLoop();
@@ -139,8 +141,6 @@ function draw() {
 			
 		}
 
-		cells[i].move();
-		cells[i].show();
 	}
 }
 
