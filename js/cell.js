@@ -1,14 +1,24 @@
-function Cell(team, pos, r, c) {
+function Cell(team, pos, breed, c, r) {
 	if (pos) {
 		this.pos = pos.copy();
 	} else {
 		this.pos = createVector(random(200,width-200), random(200,height-200));
 	}
 	
+	this.breed = breed || "bacteria"
 	this.lifetime = 25*60;
 	this.team = team;
 	this.r = r || 120;
-	this.c = c || color(random(0,200), random(0,200), random(0,200), 100);
+
+	switch (this.breed) {
+		case "bacteria":
+			this.c = c || color(random(0,200), random(0,200), random(0,200), 100);
+			break;
+		case "virus":
+			this.c = color(127, 191, 63, 100);
+			break;
+	}
+
 	this.cs = String(c);
 
 	this.clicked = function(x, y) {
@@ -35,10 +45,10 @@ function Cell(team, pos, r, c) {
 		this.pos.x += random(-this.r,this.r)
 		this.pos.y += random(-this.r,this.r)
 		if (this.r > 75) {
-			var cell = new Cell(this.team, this.pos, this.r*0.8, this.c);
+			var cell = new Cell(this.team, this.pos, this.breed, this.c, this.r*0.8);
 		}
 		else {
-			var cell = new Cell(this.team, this.pos, this.r+floor(random(0,10)), this.c);
+			var cell = new Cell(this.team, this.pos, this.breed, this.c, this.r+floor(random(0,10)));
 		}
 		
 		return cell;

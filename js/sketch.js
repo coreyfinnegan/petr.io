@@ -9,8 +9,8 @@ function setup() {
   	cnv.position(x, y);
 	frameRate(60);
 	background(200);
-	cells.push(new Cell("a", createVector(341,384)));
-	cells.push(new Cell("b", createVector(1025,384)));
+	cells.push(new Cell("a", createVector(341,384), "bacteria", color(61, 144, 183, 100)));
+	cells.push(new Cell("b", createVector(1025,384), "bacteria", color(197, 41, 41, 100)));
 }
 
 function draw() {
