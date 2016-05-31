@@ -1,10 +1,15 @@
+<<<<<<< HEAD
 function Cell(team, pos, breed, c, r) {
+=======
+function Cell(team, pos, r, c) {
+>>>>>>> a69d5babe80b989f7013ccca7e8778f47f32f27c
 	if (pos) {
 		this.pos = pos.copy();
 	} else {
 		this.pos = createVector(random(200,width-200), random(200,height-200));
 	}
 	
+<<<<<<< HEAD
 	this.breed = breed || "bacteria"
 	this.lifetime = 25*60;
 	this.team = team;
@@ -19,6 +24,12 @@ function Cell(team, pos, breed, c, r) {
 			break;
 	}
 
+=======
+	this.lifetime = 25*60;
+	this.team = team;
+	this.r = r || 120;
+	this.c = c || color(random(0,200), random(0,200), random(0,200), 100);
+>>>>>>> a69d5babe80b989f7013ccca7e8778f47f32f27c
 	this.cs = String(c);
 
 	this.clicked = function(x, y) {
@@ -45,10 +56,17 @@ function Cell(team, pos, breed, c, r) {
 		this.pos.x += random(-this.r,this.r)
 		this.pos.y += random(-this.r,this.r)
 		if (this.r > 75) {
+<<<<<<< HEAD
 			var cell = new Cell(this.team, this.pos, this.breed, this.c, this.r*0.8);
 		}
 		else {
 			var cell = new Cell(this.team, this.pos, this.breed, this.c, this.r+floor(random(0,10)));
+=======
+			var cell = new Cell(this.team, this.pos, this.r*0.8, this.c);
+		}
+		else {
+			var cell = new Cell(this.team, this.pos, this.r+floor(random(0,10)), this.c);
+>>>>>>> a69d5babe80b989f7013ccca7e8778f47f32f27c
 		}
 		
 		return cell;
