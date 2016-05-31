@@ -1,6 +1,6 @@
 var cells = [];
-var aliveA = 1;
-var aliveB = 1;
+var aliveA = 2;
+var aliveB = 2;
 var start = true;
 function setup() {
 	var cnv = createCanvas(1366,768);
@@ -11,6 +11,11 @@ function setup() {
 	background(200);
 	cells.push(new Cell("a", createVector(341,384), "bacteria", color(61, 144, 183, 100)));
 	cells.push(new Cell("b", createVector(1025,384), "bacteria", color(197, 41, 41, 100)));
+	for (var i = cells.length-1; i >= 0; i--) {
+		cells.push(cells[i].mitosis());
+		cells.push(cells[i].mitosis());
+		cells.splice(i, 1);
+	}
 }
 
 function draw() {
@@ -63,7 +68,9 @@ function draw() {
 			break;
 		}
 		var cd = dist(cells[i].pos.x, cells[i].pos.y, 0.5*width, 0.5*height)+0.5*cells[i].r
-		var chance = floor(random(500))
+		var chance = floor(random(cells[i].chance));
+		
+		
 		if (cells[i].pos.y > height || cells[i].pos.y < 0 || cells[i].pos.x < 0 || cells[i].pos.x > width) {
 			if (cells[i].team == "a") {
 				aliveA += -1;

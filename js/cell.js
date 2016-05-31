@@ -4,18 +4,25 @@ function Cell(team, pos, breed, c, r) {
 	} else {
 		this.pos = createVector(random(200,width-200), random(200,height-200));
 	}
-	
+
+	//this.chance = 500;
 	this.breed = breed || "bacteria"
-	this.lifetime = 25*60;
+	//this.lifetime = 25*60;
 	this.team = team;
-	this.r = r || 120;
+	//this.r = r || 120;
 
 	switch (this.breed) {
 		case "bacteria":
 			this.c = c || color(random(0,200), random(0,200), random(0,200), 100);
+			this.chance = 500;
+			this.lifetime = 25*60
+			this.r = r || 120;
 			break;
 		case "virus":
 			this.c = color(127, 191, 63, 100);
+			this.chance = 1000000000;
+			this.lifetime = 600*60
+			this.r = r || 100;
 			break;
 	}
 
@@ -65,6 +72,7 @@ function Cell(team, pos, breed, c, r) {
 			if (this.r > cells[i].r) {
 				this.big = true;
 				this.cankill = true;
+				this.chance = this.chance*0.25;
 			} else if (this.r < cells[i].r) {
 				this.big = false;
 				this.cankill = true;
