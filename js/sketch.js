@@ -2,6 +2,11 @@ var cells = [];
 var aliveA = 2;
 var aliveB = 2;
 var start = true;
+
+function isInArray(days, day) {
+    return days.indexOf(day.toLowerCase()) > -1;
+}
+
 function setup() {
 	var cnv = createCanvas(1366,768);
 	var x = (windowWidth - width) / 2;
@@ -15,6 +20,9 @@ function setup() {
 		cells.push(cells[i].mitosis());
 		cells.push(cells[i].mitosis());
 		cells.splice(i, 1);
+		if (isInArray(cells[i].abilities, "infect")){
+					console.log(cells[i].team + " has infect ability");
+				}
 	}
 }
 
@@ -69,7 +77,9 @@ function draw() {
 		}
 		var cd = dist(cells[i].pos.x, cells[i].pos.y, 0.5*width, 0.5*height)+0.5*cells[i].r
 		var chance = floor(random(cells[i].chance));
-		
+		//var chance = floor(random(25));
+		console.log(cells[i].chance);
+		console.log(chance);
 		
 		if (cells[i].pos.y > height || cells[i].pos.y < 0 || cells[i].pos.x < 0 || cells[i].pos.x > width) {
 			if (cells[i].team == "a") {
@@ -117,7 +127,7 @@ function draw() {
 		cells[i].show();
 		
 		if (cells[i].contact()) {
-			if (cells[i].big == false && cells[i].cankill) {
+			if (cells[i].big == false && cells[i].cankill && cells[i].breed != "virus") {
 				if (cells[i].team == "a") {
 					aliveA += -1;
 				}
@@ -125,6 +135,11 @@ function draw() {
 					aliveB += -1;
 				}
 				cells.splice(i, 1);	
+			}
+			else if (cells[i].breed == "virus" || (aliveA + aliveB) > 150) {
+				cells.push(cells[i].mitosis());
+				cells.push(cells[i].mitosis());
+				cells.splice(i, 1);
 			}
 			
 		}

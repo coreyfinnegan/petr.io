@@ -16,13 +16,15 @@ function Cell(team, pos, breed, c, r) {
 			this.c = c || color(random(0,200), random(0,200), random(0,200), 100);
 			this.chance = 500;
 			this.lifetime = 25*60
-			this.r = r || 120;
+			this.r = r || 150;
+			this.abilities = [];
 			break;
 		case "virus":
 			this.c = color(127, 191, 63, 100);
-			this.chance = 1000000000;
+			this.chance = 250;
 			this.lifetime = 600*60
 			this.r = r || 100;
+			this.abilities = ["infect"];
 			break;
 	}
 
@@ -72,7 +74,6 @@ function Cell(team, pos, breed, c, r) {
 			if (this.r > cells[i].r) {
 				this.big = true;
 				this.cankill = true;
-				this.chance = this.chance*0.25;
 			} else if (this.r < cells[i].r) {
 				this.big = false;
 				this.cankill = true;
@@ -81,7 +82,7 @@ function Cell(team, pos, breed, c, r) {
 				this.cankill = false;
 			}
 			var dc = dist(this.pos.x, this.pos.y, cells[i].pos.x, cells[i].pos.y);
-			if (dc < this.r && this.c != cells[i].c) {
+			if (dc < this.r && this.team != cells[i].team) {
 				return true;
 			}
 		}
