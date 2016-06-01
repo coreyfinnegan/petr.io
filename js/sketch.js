@@ -13,11 +13,11 @@ function setup() {
 	var x = (windowWidth - width) / 2;
   	var y = (windowHeight - height) / 2;
   	cnv.position(x, y);
+  	
 	frameRate(60);
-	background(200);
-	fill('#222');
-	noStroke();
-	ellipse(0.5*width, 0.5*height, width, height);
+	//fill('#222');
+	//noStroke();
+	//ellipse(0.5*width, 0.5*height, width, height);
 	cells.push(new Cell("a", createVector(341,384), "bacteria", color(61, 144, 183, 100)));
 	cells.push(new Cell("b", createVector(1025,384), "bacteria", color(197, 41, 41, 100)));
 	for (var i = cells.length-1; i >= 0; i--) {
@@ -31,8 +31,7 @@ function setup() {
 }
 
 function draw() {
-	cells[i].move();
-	cells[i].show();
+	background('#222');
 	if (aliveA == 0 && start == false) {
 		console.log("A team wins!")
 		noLoop();
@@ -50,7 +49,7 @@ function draw() {
 	else {
 		start = false;
 	}
-	background('#222');
+	
 	
 	
 	var scoreA = select("#ascore")
@@ -59,6 +58,9 @@ function draw() {
 	scoreA.html(String(aliveA));
 	scoreB.html(String(aliveB));
 	for (var i = cells.length-1; i >=0; i--) {
+
+		cells[i].move();
+		cells[i].show();
 		//cells.push(cells[i].mitosis());
 		//cells.push(cells[i].mitosis());
 		//cells.splice(i, 1);
